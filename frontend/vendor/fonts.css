@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Federo";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/Federo-Regular.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Relaway";
+  font-style: normal;
+  font-weight: 900;
+  src: url("./fonts/Raleway-Black.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Relaway";
+  font-style: italic;
+  font-weight: 900;
+  src: url("./fonts/Raleway-BlackItalic.ttf") format("tff");
+}
+
+@font-face {
+  font-family: "Relaway";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./fonts/Raleway-Medium.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Relaway";
+  font-style: italic;
+  font-weight: 500;
+  src: url("./fonts/Raleway-MediumItalic.ttf") format("tff");
+}
+
+@font-face {
+  font-family: "Relaway";
+  font-style: normal;
+  font-weight: 200;
+  src: url("./fonts/Raleway-ExtraLight.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Relaway";
+  font-style: italic;
+  font-weight: 200;
+  src: url("./fonts/Raleway-ExtraLightItalic.ttf") format("tff");
+}
