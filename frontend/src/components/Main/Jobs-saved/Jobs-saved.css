@@ -1,0 +1,52 @@
+.jobs-saved {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.jobs-saved__card {
+  margin: 0;
+  width: 100%;
+  max-width: 640px;
+  background-color: transparent;
+  padding-top: 70px;
+}
+
+.jobs-saved__title {
+  margin: 0;
+  font-family: "Federo";
+  font-size: 60px;
+  font-weight: 400;
+  color: #d5d2cb;
+  display: flex;
+  justify-content: center;
+}
+
+.jobs-saved__subtitle {
+  margin: 0;
+  font-family: "Federo";
+  font-size: 15px;
+  font-weight: 500;
+  color: #e75c16;
+  display: flex;
+  justify-content: center;
+}
+
+.jobs-saved__empty {
+  margin: 0;
+  padding: 100px 0;
+  font-family: "Federo";
+  font-size: 25px;
+  font-weight: 500;
+  color: #848382;
+  display: flex;
+  justify-content: center;
+}
+
+.jobs-saved__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}

@@ -1,0 +1,47 @@
+.job-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  margin: 10px;
+  background-color: #d5d2cb;
+  color: #a33215;
+  border-radius: 10px;
+  font-family: "Raleway";
+}
+
+.job-card__info {
+  /* color: #A33215; */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.job-card__title {
+  color: #11120d;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.job-card__meta {
+  margin: 0;
+  font-size: 13px;
+}
+
+.job-card__save {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.job-card__save-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
