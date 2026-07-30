@@ -86,17 +86,6 @@
   background-color: #ec7031;
 }
 
-/* .main__jobs {
-  display: flex;
-  flex-direction: column;
-} */
-
-/* @media (max-width: 680px) {
-  .main__filter {
-    max-height: 50px;
-  }
-} */
-
 @media (max-width: 500px) {
   .main__filter {
     max-width: 150px;

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./Login.css";
+import { isValidEmail } from "../../../utils/validator";
 
-function Login() {
+function Login({ handleLogin }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,7 +16,18 @@ function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    handleLogin(formData);
   }
+
+  const emailError =
+    formData.email && !isValidEmail(formData.email)
+      ? "Place a valid email"
+      : "";
+
+  const passwordError =
+    formData.password && formData.password.length < 6
+      ? "The password must have at least 6 characters"
+      : "";
 
   return (
     <section className="login">
@@ -31,14 +43,20 @@ function Login() {
               Email
             </label>
             <input
-              className="login__input"
+              className={`login__input ${emailError ? "login__input_type_error" : ""}`}
               type="email"
               id="login-email"
               name="email"
               placeholder="lipa@email.com"
               value={formData.email}
               onChange={handleChange}
+              required
             />
+            <span
+              className={`login__input-error ${emailError ? "login__input-error_active" : ""}`}
+            >
+              {emailError}
+            </span>
           </div>
 
           <div className="login__field">
@@ -46,25 +64,41 @@ function Login() {
               Password
             </label>
             <input
-              className="login__input"
+              className={`login__input ${passwordError ? "login__input_type_error" : ""}`}
               type="password"
               id="login-password"
               name="password"
-              placeholder="******"
+              placeholder="Password"
+              minLength="6"
               value={formData.password}
               onChange={handleChange}
+              required
             />
+            <span
+              className={`login__input-error ${passwordError ? "login__input-error_active" : ""}`}
+            >
+              {passwordError}
+            </span>
           </div>
 
-          <button className="login__submit" type="submit">
+          <button
+            className="login__submit"
+            type="submit"
+            disabled={
+              !formData.email ||
+              !formData.password ||
+              !isValidEmail(formData.email) ||
+              formData.password.length < 6
+            }
+          >
             Login
           </button>
         </form>
 
         <p className="login__footer">
-          Don&apos;t have an account?{" "}
+          Don't have an account?{" "}
           <a className="login__link" href="/register">
-            Login
+            Register
           </a>
         </p>
       </div>
