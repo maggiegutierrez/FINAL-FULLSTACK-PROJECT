@@ -1,12 +1,9 @@
+import { useState } from "react";
 import { useSavedJobs } from "../../context/SavedJobsContext";
 import JobCard from "./JobCard/JobCard";
 import "./Main.css";
 
-const FILTERS = {
-  category: "Software engineering",
-  level: "Entry level",
-  location: "Remote",
-};
+import { CATEGORY_OPTIONS, LEVEL_OPTIONS } from "../../utils/jobFilters";
 
 const MOCK_JOBS = [
   { id: 1, title: "Frontend developer", company: "Nubank", location: "Remote" },
@@ -20,6 +17,10 @@ const MOCK_JOBS = [
 ];
 
 function Main() {
+  const [selectedCategory, setSelectedCategory] = useState(CATEGORY_OPTIONS[0]);
+  const [selectedLevel, setSelectedLevel] = useState(LEVEL_OPTIONS[0]);
+  const [openFilter, setOpenFilter] = useState(null);
+
   const { isJobSaved, toggleSaveJob } = useSavedJobs();
 
   function handleSearch() {
@@ -34,20 +35,68 @@ function Main() {
           Filter by category, level, and location
         </p>
 
-        <div className="main__filters">
-          <button className="main__filter" type="button">
+        <div className="main__filter-wrapper">
+          <button
+            className="main__filter"
+            type="button"
+            onClick={() =>
+              setOpenFilter(openFilter === "category" ? null : "category")
+            }
+          >
             <span className="main__filter-label">Category</span>
-            <span className="main__filter-value">{FILTERS.category}</span>
+            <span className="main__filter-value">{selectedCategory}</span>
           </button>
 
-          <button className="main__filter" type="button">
+          {openFilter === "category" && (
+            <ul className="main__filter-options">
+              {CATEGORY_OPTIONS.map((option) => (
+                <li key={option}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedCategory(option);
+                      setOpenFilter(null);
+                    }}
+                  >
+                    {option}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <button
+            className="main__filter"
+            type="button"
+            onClick={() =>
+              setOpenFilter(openFilter === "level" ? null : "level")
+            }
+          >
             <span className="main__filter-label">Level</span>
-            <span className="main__filter-value">{FILTERS.level}</span>
+            <span className="main__filter-value">{selectedLevel}</span>
           </button>
 
-          <button className="main__filter" type="button">
+          {openFilter === "level" && (
+            <ul className="main__filter-options">
+              {LEVEL_OPTIONS.map((option) => (
+                <li key={option}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedLevel(option);
+                      setOpenFilter(null);
+                    }}
+                  >
+                    {option}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <button className="main__filter" type="button" disabled>
             <span className="main__filter-label">Location</span>
-            <span className="main__filter-value">{FILTERS.location}</span>
+            <span className="main__filter-value">Remote / Flexible</span>
           </button>
         </div>
 

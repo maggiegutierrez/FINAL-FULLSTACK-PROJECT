@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import "./App.css";
 
 import Login from "../Main/Login/Login";
@@ -37,13 +38,15 @@ function App() {
     <div className="app">
       <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+          <Route path="/" element={<Main />} />
+          <Route path="/saved" element={<JobsSaved />} />
+        </Route>
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route
           path="/register"
           element={<Register handleRegister={handleRegister} />}
         />
-        <Route path="/saved" element={<JobsSaved />} />
       </Routes>
       <Footer />
     </div>

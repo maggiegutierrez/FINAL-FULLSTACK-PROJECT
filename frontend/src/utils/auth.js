@@ -16,8 +16,8 @@ export const register = (email, password, name) => {
   });
 };
 
-export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+export const login = (email, password) => {
+  return fetch(`${BASE_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export const authorize = (email, password) => {
     });
 };
 
-export const login = () => {
+export const getCurrentUser = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
