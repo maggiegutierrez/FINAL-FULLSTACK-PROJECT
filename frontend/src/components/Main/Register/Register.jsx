@@ -56,7 +56,7 @@ function Register({ handleRegister }) {
               value={formData.name}
               onChange={handleChange}
               minLength="2"
-              maxLength="10"
+              maxLength="30"
               required
             />
             <span
