@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
+const { Schema } = mongoose;
 
 const savedJobSchema = new Schema({
   jobId: { type: Number, required: true },
