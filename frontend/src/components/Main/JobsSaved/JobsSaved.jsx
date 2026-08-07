@@ -1,6 +1,6 @@
 import { useSavedJobs } from "../../../context/SavedJobsContext";
 import JobCard from "../JobCard/JobCard";
-import "./Jobs-saved.css";
+import "./JobsSaved.css";
 
 function JobsSaved() {
   const { savedJobs, isJobSaved, toggleSaveJob } = useSavedJobs();
@@ -9,7 +9,7 @@ function JobsSaved() {
     <section className="jobs-saved">
       <div className="jobs-saved__card">
         <h1 className="jobs-saved__title">SAVED</h1>
-        <p className="jobs-saved__subtitle">Jobs you bookmarked:</p>
+        <p className="jobs-saved__subtitle">Jobs you saved:</p>
 
         {savedJobs.length === 0 ? (
           <p className="jobs-saved__empty">No saved jobs yet</p>
@@ -17,11 +17,11 @@ function JobsSaved() {
           <div className="jobs-saved__list">
             {savedJobs.map((job) => (
               <JobCard
-                key={job.id}
+                key={job._id}
                 title={job.title}
                 company={job.company}
                 location={job.location}
-                isSaved={isJobSaved(job.id)}
+                isSaved={isJobSaved(job.jobId)}
                 onToggleSave={() => toggleSaveJob(job)}
               />
             ))}

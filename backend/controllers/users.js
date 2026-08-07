@@ -32,27 +32,6 @@ const login = async (req, res, next) => {
   }
 };
 
-// const getUsers = async (req, res, next) => {
-//   try {
-//     const users = await User.find();
-//     res.json(users);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
-// const getUserId = async (req, res, next) => {
-//   try {
-//     const user = await User.findById(req.params.userId);
-//     if (!user) {
-//       throw new NotFoundError("User ID not found");
-//     }
-//     res.json(user);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
 const getCurrentUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
