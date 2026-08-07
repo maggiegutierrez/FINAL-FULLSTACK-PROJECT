@@ -8,9 +8,7 @@ import { SavedJobsProvider } from "./context/SavedJobsContext";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <SavedJobsProvider>
-        <App />
-      </SavedJobsProvider>
+      <App />
     </BrowserRouter>
   </StrictMode>,
 );

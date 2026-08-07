@@ -4,7 +4,6 @@ import { isValidEmail } from "../../../utils/validator";
 
 function Login({ handleLogin }) {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });

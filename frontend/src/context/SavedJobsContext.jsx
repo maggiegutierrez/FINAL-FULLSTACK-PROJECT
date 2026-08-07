@@ -1,22 +1,41 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { getCurrentUser } from "../utils/auth";
+import { saveJob, unsaveJob } from "../utils/jobs";
 
 const SavedJobsContext = createContext(null);
 
-export function SavedJobsProvider({ children }) {
+export function SavedJobsProvider({ children, isLoggedIn }) {
   const [savedJobs, setSavedJobs] = useState([]);
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setSavedJobs([]);
+      return;
+    }
+    getCurrentUser()
+      .then((user) => setSavedJobs(user.savedJobs))
+      .catch(console.error);
+  }, [isLoggedIn]);
+
   function isJobSaved(jobId) {
-    return savedJobs.some((job) => job.id === jobId);
+    return savedJobs.some((job) => job.jobId === jobId);
   }
 
   function toggleSaveJob(job) {
-    setSavedJobs((prev) => {
-      if (prev.some((saved) => saved.id === job.id)) {
-        return prev.filter((saved) => saved.id !== job.id);
-      }
-      return [...prev, job];
-    });
+    const jobId = job.id ?? job.jobId;
+
+    if (isJobSaved(jobId)) {
+      unsaveJob(jobId).then(setSavedJobs).catch(console.error);
+    } else {
+      saveJob(jobId, {
+        title: job.title,
+        company: job.company,
+        location: job.location,
+      })
+        .then(setSavedJobs)
+        .catch(console.error);
+    }
   }
 
   const value = { savedJobs, isJobSaved, toggleSaveJob };
@@ -30,6 +49,7 @@ export function SavedJobsProvider({ children }) {
 
 SavedJobsProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 export function useSavedJobs() {

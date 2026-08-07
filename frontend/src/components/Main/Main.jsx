@@ -1,30 +1,61 @@
 import { useState } from "react";
+import { searchJobs } from "../../utils/jobs";
 import { useSavedJobs } from "../../context/SavedJobsContext";
 import JobCard from "./JobCard/JobCard";
 import "./Main.css";
 
 import { CATEGORY_OPTIONS, LEVEL_OPTIONS } from "../../utils/jobFilters";
 
-const MOCK_JOBS = [
-  { id: 1, title: "Frontend developer", company: "Nubank", location: "Remote" },
-  {
-    id: 2,
-    title: "Product designer",
-    company: "Shopify",
-    location: "Mexico City",
-  },
-  { id: 3, title: "Backend engineer", company: "Datadog", location: "Remote" },
-];
+const LOCATION_OPTIONS = ["Remote", "On-site"];
 
 function Main() {
-  const [selectedCategory, setSelectedCategory] = useState(CATEGORY_OPTIONS[0]);
-  const [selectedLevel, setSelectedLevel] = useState(LEVEL_OPTIONS[0]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+
   const [openFilter, setOpenFilter] = useState(null);
+  const [jobs, setJobs] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const { isJobSaved, toggleSaveJob } = useSavedJobs();
 
+  function isRemoteJob(job) {
+    return /remote|flexible/i.test(job.location || ""); // Nueva expresión regular aprendida
+  }
+
+  const displayedJobs = selectedLocation
+    ? jobs.filter((job) =>
+        selectedLocation === "Remote" ? isRemoteJob(job) : !isRemoteJob(job),
+      )
+    : jobs;
+
+  function fetchJobs(pageToLoad) {
+    searchJobs({
+      category: selectedCategory,
+      level: selectedLevel,
+      page: pageToLoad,
+    })
+      .then((data) => {
+        setJobs(data.jobs);
+        setPage(data.page);
+        setPageCount(data.pageCount);
+        setHasSearched(true);
+      })
+      .catch(console.error);
+  }
+
   function handleSearch() {
-    // TODO: Fase 4 — llamar al endpoint backend que consulta The Muse con los filtros actuales
+    fetchJobs(1);
+  }
+
+  function handleNextPage() {
+    fetchJobs(page + 1);
+  }
+
+  function handlePrevPage() {
+    fetchJobs(page - 1);
   }
 
   return (
@@ -94,18 +125,54 @@ function Main() {
             </ul>
           )}
 
-          <button className="main__filter" type="button" disabled>
+          <button
+            className="main__filter"
+            type="button"
+            onClick={() =>
+              setOpenFilter(openFilter === "location" ? null : "location")
+            }
+          >
             <span className="main__filter-label">Location</span>
-            <span className="main__filter-value">Remote / Flexible</span>
+            <span className="main__filter-value">{selectedLocation}</span>
           </button>
+
+          {openFilter === "location" && (
+            <ul className="main__filter-options">
+              {LOCATION_OPTIONS.map((option) => (
+                <li key={option}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedLocation(option);
+                      setOpenFilter(null);
+                    }}
+                  >
+                    {option}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <button className="main__search" type="button" onClick={handleSearch}>
-          Search
+          SEARCH
         </button>
 
+        {!hasSearched && (
+          <p className="main__empty">
+            Choose your filters and click SEARCH to see jobs
+          </p>
+        )}
+
+        {hasSearched && displayedJobs.length === 0 && (
+          <p className="main__empty">
+            No jobs matched this page — try NEXT below or other filter
+          </p>
+        )}
+
         <div className="main__jobs">
-          {MOCK_JOBS.map((job) => (
+          {displayedJobs.map((job) => (
             <JobCard
               key={job.id}
               title={job.title}
@@ -116,6 +183,31 @@ function Main() {
             />
           ))}
         </div>
+
+        {pageCount > 1 && (
+          <div className="main__pagination">
+            <button
+              className="main__pagination-prev_next"
+              type="button"
+              onClick={handlePrevPage}
+              disabled={page <= 1}
+            >
+              PREV
+            </button>
+
+            <span>
+              {page} - {pageCount}
+            </span>
+            <button
+              className="main__pagination-prev_next"
+              type="button"
+              onClick={handleNextPage}
+              disabled={page >= pageCount}
+            >
+              NEXT
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

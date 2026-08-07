@@ -1,55 +1,40 @@
-import { BASE_URL, TOKEN_KEY } from "./constants";
+import { BASE_URL } from "./constants";
 
-export const register = (email, password, name) => {
+export const register = (name, email, password) => {
   return fetch(`${BASE_URL}/register`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      password: password,
-      email: email,
-      name: name,
-    }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Register error ${res.status}`);
-  });
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, password }),
+  }).then((res) =>
+    res.ok ? res.json() : Promise.reject(`Register error ${res.status}`),
+  );
 };
 
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/login`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      password: password,
-      email: email,
-    }),
-  })
-    .then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Login error ${res.status}`);
-    })
-    .then((data) => {
-      localStorage.setItem(TOKEN_KEY, data.token);
-      return data;
-    });
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  }).then((res) =>
+    res.ok ? res.json() : Promise.reject(`Login error ${res.status}`),
+  );
 };
 
 export const getCurrentUser = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}`,
-    },
-  }).then((res) => {
-    return res.ok
-      ? res.json()
-      : Promise.reject(`User unrecognized  ${res.status}`);
-  });
+    credentials: "include",
+  }).then((res) =>
+    res.ok ? res.json() : Promise.reject(`User unrecognized ${res.status}`),
+  );
 };
 
 export const logout = () => {
-  return Promise.resolve(localStorage.removeItem(TOKEN_KEY));
+  return fetch(`${BASE_URL}/logout`, {
+    method: "POST",
+    credentials: "include",
+  }).then((res) =>
+    res.ok ? res.json() : Promise.reject(`Logout error ${res.status}`),
+  );
 };
