@@ -7,6 +7,7 @@ function Login({ handleLogin }) {
     email: "",
     password: "",
   });
+  const [loginError, setLoginError] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -15,7 +16,10 @@ function Login({ handleLogin }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    handleLogin(formData);
+    setLoginError("");
+    handleLogin(formData).catch(() => {
+      setLoginError("Incorrent email or password. Please, try again.");
+    });
   }
 
   const emailError =
@@ -79,7 +83,7 @@ function Login({ handleLogin }) {
               {passwordError}
             </span>
           </div>
-
+          {loginError && <p className="login__error">{loginError}</p>}
           <button
             className="login__submit"
             type="submit"
