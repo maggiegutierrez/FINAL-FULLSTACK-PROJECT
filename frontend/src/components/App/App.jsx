@@ -27,13 +27,10 @@ function App() {
   }, []);
 
   const handleLogin = ({ email, password }) => {
-    return auth
-      .login(email, password)
-      .then(() => {
-        setIsLoggedIn(true);
-        navigate("/");
-      })
-      .catch(console.error);
+    return auth.login(email, password).then(() => {
+      setIsLoggedIn(true);
+      navigate("/");
+    });
   };
 
   const handleRegister = ({ name, email, password }) => {

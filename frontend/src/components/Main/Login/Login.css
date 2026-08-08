@@ -136,3 +136,11 @@
   color: #e97f4a;
   text-decoration: none;
 }
+
+.login__error {
+  color: #ee3465;
+  font-size: 12px;
+  text-align: center;
+  margin: 0;
+  padding: 0 0 10px;
+}
