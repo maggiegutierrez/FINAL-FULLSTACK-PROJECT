@@ -3,34 +3,44 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 15px;
-  margin: 10px;
-  background-color: #d5d2cb;
-  color: #a33215;
+  background: linear-gradient(
+    135deg,
+    rgba(239, 239, 239, 0.052),
+    rgba(12, 12, 12, 0.147)
+  );
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 4px 0 rgba(107, 107, 107, 0.37);
+  border: 1px solid rgba(154, 153, 153, 0.18);
+  color: #e75c16;
   border-radius: 10px;
   font-family: "Raleway";
 }
 
+.job-card:hover {
+  box-shadow: 0 3px 7px 0 #e75c16cf;
+  margin-top: -4px;
+  transition: 0.2s ease-in-out;
+}
+
 .job-card__info {
-  /* color: #A33215; */
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
 .job-card__title {
-  color: #11120d;
+  color: #d5d2cb;
   margin: 0;
-  font-size: 20px;
+  font-size: 13px;
   font-weight: 600;
 }
 
 .job-card__meta {
   margin: 0;
-  font-size: 13px;
+  font-size: 10px;
 }
 
 .job-card__save {
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,4 +54,6 @@
   width: 20px;
   height: 20px;
   display: block;
+}
+@media (max-width: 460px) {
 }

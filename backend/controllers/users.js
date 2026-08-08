@@ -4,6 +4,8 @@ const User = require("../models/users");
 const { JWT_SECRET } = require("../utils/config");
 const { NotFoundError, UnauthorizedError } = require("../errors/indexErrors");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -22,8 +24,8 @@ const login = async (req, res, next) => {
     res
       .cookie("jwt", token, {
         httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
+        sameSite: isProduction ? "none" : "lax",
+        secure: isProduction,
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .send({ message: "Login successful" });
@@ -66,7 +68,13 @@ const createUser = async (req, res, next) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie("jwt").send({ message: "Logged out successfully" });
+  res
+    .clearCookie("jwt", {
+      httpOnly: true,
+      sameSite: isProduction ? "none" : "lax",
+      secure: isProduction,
+    })
+    .send({ message: "Logged out successfully" });
 };
 
 module.exports = {

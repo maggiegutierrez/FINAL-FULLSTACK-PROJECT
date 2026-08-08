@@ -1,6 +1,6 @@
 .header {
-  padding-top: 30px;
-  font-family: "Raleway";
+  margin: 30px 0 0;
+  font-family: "Federo";
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,15 +13,33 @@
 }
 
 .header__logo {
-  width: 80px;
+  width: 60px;
+  margin: 0 auto 0 0;
+  padding-left: 50px;
+}
+
+.header__logo-first {
+  width: 60px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.header__saved-jobs {
   margin: 0 100px;
 }
 
 .header__link {
   text-decoration: none;
   color: #e75c16;
-  font-size: 10px;
-  margin: 0 100px;
+  font-family: "Federo";
+  font-size: 12px;
+  margin: 0 40px;
+}
+
+.header__link:hover {
+  font-size: 13px;
+  transition: 0.3s ease-in-out;
 }
 
 .header__user-block {
@@ -38,23 +56,60 @@
 }
 
 .header__logout {
-  font-family: "Raleway";
   color: #e75c16;
   background-color: transparent;
   border: 0;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 400;
-  padding-left: 25px;
+  padding-left: 200px;
   cursor: pointer;
   width: 150px;
 }
 
-.header__save-icon {
-  width: 25px;
+.header__logout:hover {
+  font-size: 16px;
+  transition: 0.3s ease-in-out;
 }
 
-@media screen and (max-width: 500px) {
+.header__save-icon {
+  width: 25px;
+  padding: 0;
+  margin: 0;
+  transition: 0.3s ease-in-out;
+  background-color: transparent;
+}
+
+.header__save-icon:hover {
+  width: 28px;
+  transition: 0.2s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .header__logout {
+    padding-left: 250px;
+  }
+}
+
+@media (max-width: 586px) {
+  .header,
+  .header__section {
+    justify-content: flex-start;
+  }
+
   .header__logo {
-    margin: 0 50px;
+    padding: 0 80px;
+  }
+
+  .header__logout {
+    padding: 0;
+    margin-left: auto;
+  }
+
+  .header__saved-jobs {
+    margin: 0;
+  }
+
+  .header__save-icon {
+    padding-right: 80px;
   }
 }
