@@ -18,7 +18,7 @@ function Login({ handleLogin }) {
     event.preventDefault();
     setLoginError("");
     handleLogin(formData).catch(() => {
-      setLoginError("Incorrent email or password. Please, try again.");
+      setLoginError("Incorrect email or password. Please try again.");
     });
   }
 
