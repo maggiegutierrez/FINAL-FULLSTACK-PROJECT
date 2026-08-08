@@ -9,7 +9,7 @@ function Header({ isLoggedIn, onLogout }) {
     if (isLoggedIn && location.pathname === "/") {
       return (
         <>
-          <img src={logo} alt="Find me a job" className="logo header__logo" />
+          <img src={logo} alt="Find me a job" className="header__logo" />
           <button onClick={onLogout} className="header__logout">
             Logout
           </button>
@@ -27,7 +27,7 @@ function Header({ isLoggedIn, onLogout }) {
     if (isLoggedIn && location.pathname === "/saved") {
       return (
         <>
-          <img src={logo} alt="Find me a job" className="logo header__logo" />
+          <img src={logo} alt="Find me a job" className="header__logo" />
           <Link to="/" className="header__link">
             <p>Find another job</p>
           </Link>
@@ -41,11 +41,7 @@ function Header({ isLoggedIn, onLogout }) {
     ) {
       return (
         <>
-          <img
-            src={logo}
-            alt="Find me a job"
-            className="logo header__logo-first"
-          />
+          <img src={logo} alt="Find me a job" className="header__logo-first" />
         </>
       );
     }
