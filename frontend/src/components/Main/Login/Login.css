@@ -1,14 +1,14 @@
 .login {
   font-family: Raleway;
-  flex-shrink: 1;
   background-color: #11120d;
   color: #d5d2cb;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 70vh;
   padding: 0;
+  margin: 0;
 }
 
 .login__card {
@@ -16,13 +16,12 @@
   align-items: center;
   width: 100%;
   max-width: 350px;
-  border: 0.5px solid rgb(59, 58, 58);
-  border-radius: 10px;
-  padding: 50px;
-  box-shadow: 0px 15px 15px 1px #000000;
+  padding: 0 50px;
 }
 
 .login__title {
+  display: flex;
+  justify-content: center;
   margin: 0;
   font-family: Federo;
   font-size: 70px;
@@ -30,6 +29,8 @@
 }
 
 .login__subtitle {
+  display: flex;
+  justify-content: center;
   margin: 0;
   padding: 0;
   font-size: 15px;
@@ -47,6 +48,8 @@
 .login__field {
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 .login__label {
@@ -62,7 +65,7 @@
   background-color: transparent;
   font-size: 20px;
   color: grey;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .login__input:focus {
@@ -74,7 +77,7 @@
   display: none;
   color: #ee3465;
   font-size: 12px;
-  margin-top: 5px;
+  margin: 5px;
 }
 
 .login__input-error_active {
@@ -89,12 +92,15 @@
   display: flex;
   padding: 0;
   margin-top: auto;
+  margin-bottom: 20px;
   border: none;
   background-color: #e75c16;
+  box-shadow: 0 0 10px #e75c16;
+  transition: 0.3s ease-in-out;
   border-radius: 10px;
   font-size: 20px;
   font-weight: 700;
-  color: #11120d;
+  color: #020202;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -109,11 +115,13 @@
 
 .login__submit:disabled {
   background-color: #d5d2cb;
+  color: #a8aaa7;
+  box-shadow: none;
 }
 
 .login__footer {
   margin: 0;
-  padding-top: 10px;
+  padding: 10px 0 0;
   text-align: center;
   font-size: 10px;
 }

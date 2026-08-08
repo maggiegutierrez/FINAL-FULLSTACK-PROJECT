@@ -14,9 +14,14 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://project-ef82d4ab-d03e-4bdb-b4a.web.app",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
   }),
 );

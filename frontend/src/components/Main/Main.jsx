@@ -67,92 +67,99 @@ function Main() {
         </p>
 
         <div className="main__filter-wrapper">
-          <button
-            className="main__filter"
-            type="button"
-            onClick={() =>
-              setOpenFilter(openFilter === "category" ? null : "category")
-            }
-          >
-            <span className="main__filter-label">Category</span>
-            <span className="main__filter-value">{selectedCategory}</span>
-          </button>
+          <div className="main__filter-item">
+            <button
+              className="main__filter"
+              type="button"
+              onClick={() =>
+                setOpenFilter(openFilter === "category" ? null : "category")
+              }
+            >
+              <span className="main__filter-label">Category</span>
+              <span className="main__filter-value">{selectedCategory}</span>
+            </button>
 
-          {openFilter === "category" && (
-            <ul className="main__filter-options">
-              {CATEGORY_OPTIONS.map((option) => (
-                <li key={option}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedCategory(option);
-                      setOpenFilter(null);
-                    }}
-                  >
-                    {option}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
+            {openFilter === "category" && (
+              <ul className="main__filter-options">
+                {CATEGORY_OPTIONS.map((option) => (
+                  <li key={option}>
+                    <button
+                      className="main__filter-option"
+                      type="button"
+                      onClick={() => {
+                        setSelectedCategory(option);
+                        setOpenFilter(null);
+                      }}
+                    >
+                      {option}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div className="main__filter-item">
+            <button
+              className="main__filter"
+              type="button"
+              onClick={() =>
+                setOpenFilter(openFilter === "level" ? null : "level")
+              }
+            >
+              <span className="main__filter-label">Level</span>
+              <span className="main__filter-value">{selectedLevel}</span>
+            </button>
 
-          <button
-            className="main__filter"
-            type="button"
-            onClick={() =>
-              setOpenFilter(openFilter === "level" ? null : "level")
-            }
-          >
-            <span className="main__filter-label">Level</span>
-            <span className="main__filter-value">{selectedLevel}</span>
-          </button>
+            {openFilter === "level" && (
+              <ul className="main__filter-options">
+                {LEVEL_OPTIONS.map((option) => (
+                  <li key={option}>
+                    <button
+                      className="main__filter-option"
+                      type="button"
+                      onClick={() => {
+                        setSelectedLevel(option);
+                        setOpenFilter(null);
+                      }}
+                    >
+                      {option}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div className="main__filter-item">
+            <button
+              className="main__filter"
+              type="button"
+              onClick={() =>
+                setOpenFilter(openFilter === "location" ? null : "location")
+              }
+            >
+              <span className="main__filter-label">Location</span>
+              <span className="main__filter-value">{selectedLocation}</span>
+            </button>
 
-          {openFilter === "level" && (
-            <ul className="main__filter-options">
-              {LEVEL_OPTIONS.map((option) => (
-                <li key={option}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedLevel(option);
-                      setOpenFilter(null);
-                    }}
-                  >
-                    {option}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          <button
-            className="main__filter"
-            type="button"
-            onClick={() =>
-              setOpenFilter(openFilter === "location" ? null : "location")
-            }
-          >
-            <span className="main__filter-label">Location</span>
-            <span className="main__filter-value">{selectedLocation}</span>
-          </button>
-
-          {openFilter === "location" && (
-            <ul className="main__filter-options">
-              {LOCATION_OPTIONS.map((option) => (
-                <li key={option}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedLocation(option);
-                      setOpenFilter(null);
-                    }}
-                  >
-                    {option}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
+            {openFilter === "location" && (
+              <ul className="main__filter-options">
+                {LOCATION_OPTIONS.map((option) => (
+                  <li key={option}>
+                    <button
+                      className="main__filter-option"
+                      type="button"
+                      onClick={() => {
+                        setSelectedLocation(option);
+                        setOpenFilter(null);
+                      }}
+                    >
+                      {option}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
 
         <button className="main__search" type="button" onClick={handleSearch}>
