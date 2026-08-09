@@ -1,4 +1,4 @@
-import { useSavedJobs } from "../../../context/SavedJobsContext";
+import { useSavedJobs } from "../../../context/useSavedJobs";
 import JobCard from "../JobCard/JobCard";
 import "./JobsSaved.css";
 
@@ -21,6 +21,7 @@ function JobsSaved() {
                 title={job.title}
                 company={job.company}
                 location={job.location}
+                link={job.link}
                 isSaved={isJobSaved(job.jobId)}
                 onToggleSave={() => toggleSaveJob(job)}
               />

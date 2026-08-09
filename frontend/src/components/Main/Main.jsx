@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { searchJobs } from "../../utils/jobs";
-import { useSavedJobs } from "../../context/SavedJobsContext";
+import { useSavedJobs } from "../../context/useSavedJobs";
 import JobCard from "./JobCard/JobCard";
 import "./Main.css";
 
-import { CATEGORY_OPTIONS, LEVEL_OPTIONS } from "../../utils/jobFilters";
-
-const LOCATION_OPTIONS = ["Remote", "On-site"];
+import {
+  CATEGORY_OPTIONS,
+  LEVEL_OPTIONS,
+  LOCATION_OPTIONS,
+} from "../../utils/constants";
 
 function Main() {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -17,7 +19,10 @@ function Main() {
   const [jobs, setJobs] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
+
   const [hasSearched, setHasSearched] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [searchError, setSearchError] = useState("");
 
   const { isJobSaved, toggleSaveJob } = useSavedJobs();
 
@@ -32,6 +37,8 @@ function Main() {
     : jobs;
 
   function fetchJobs(pageToLoad) {
+    setIsSubmitting(true);
+    setSearchError("");
     searchJobs({
       category: selectedCategory,
       level: selectedLevel,
@@ -43,7 +50,14 @@ function Main() {
         setPageCount(data.pageCount);
         setHasSearched(true);
       })
-      .catch(console.error);
+      .catch(() => {
+        setSearchError(
+          "Something went wrong while searching. Please try again ",
+        );
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   }
 
   function handleSearch() {
@@ -60,6 +74,11 @@ function Main() {
 
   return (
     <section className="main">
+      {isSubmitting && (
+        <div className="main__spinner-overlay">
+          <div className="main__spinner-loader"></div>
+        </div>
+      )}
       <div className="main__card">
         <h1 className="main__title">FIND A JOB</h1>
         <p className="main__subtitle">
@@ -172,11 +191,14 @@ function Main() {
           </p>
         )}
 
-        {hasSearched && displayedJobs.length === 0 && (
-          <p className="main__empty">
-            No jobs matched this page — try NEXT below or other filter
+        {hasSearched && displayedJobs.length === 0 && !searchError && (
+          <p className="main__empty main__empty_type_warning">
+            No jobs matched this page with these filters — try NEXT below or
+            other filter
           </p>
         )}
+
+        {searchError && <p className="main__error">{searchError}</p>}
 
         <div className="main__jobs">
           {displayedJobs.map((job) => (
@@ -185,6 +207,7 @@ function Main() {
               title={job.title}
               company={job.company}
               location={job.location}
+              link={job.link}
               isSaved={isJobSaved(job.id)}
               onToggleSave={() => toggleSaveJob(job)}
             />
@@ -194,7 +217,7 @@ function Main() {
         {pageCount > 1 && (
           <div className="main__pagination">
             <button
-              className="main__pagination-prev_next"
+              className="main__pagination-button"
               type="button"
               onClick={handlePrevPage}
               disabled={page <= 1}
@@ -206,7 +229,7 @@ function Main() {
               {page} - {pageCount}
             </span>
             <button
-              className="main__pagination-prev_next"
+              className="main__pagination-button"
               type="button"
               onClick={handleNextPage}
               disabled={page >= pageCount}

@@ -6,7 +6,7 @@
   margin: auto;
   background-color: #11120d;
   color: #d5d2cb;
-  font-family: "Raleway";
+  font-family: "Raleway", Arial, sans-serif;
 }
 
 .main__card {
@@ -19,7 +19,7 @@
   display: flex;
   justify-content: center;
   margin: 0;
-  font-family: "Federo";
+  font-family: "Federo", Arial, sans-serif;
   font-size: 60px;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .main__filter:hover {
-  max-width: 110%;
+  transform: scale(1.05);
   transition: 0.3s ease-in-out;
 }
 
@@ -139,8 +139,8 @@
   background-color: #e75c16;
   box-shadow: 0 0 10px #e75c16;
   transition: 0.3s ease-in-out;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 25px;
+  font-family: "Federo", Arial, sans-serif;
   color: #a33215;
   cursor: pointer;
   letter-spacing: 10px;
@@ -149,8 +149,53 @@
 .main__search:hover {
   background-color: #ec7031;
   box-shadow: 0 0 15px #ec7031;
-  width: 101%;
+  transform: scale(1.01);
   transition: 0.2s ease-in-out;
+}
+
+.main__spinner-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(17, 18, 13, 0.803);
+  z-index: 1000;
+}
+
+.main__spinner-loader {
+  width: 140px;
+  height: 140px;
+  display: grid;
+}
+
+.main__spinner-loader::before,
+.main__spinner-loader::after {
+  content: "";
+  grid-area: 1/1;
+  --c: radial-gradient(farthest-side, #e75c16 92%, transparent);
+  background:
+    var(--c) 50% 0,
+    var(--c) 50% 100%,
+    var(--c) 100% 50%,
+    var(--c) 0 50%;
+  background-size: 28px 28px;
+  background-repeat: no-repeat;
+  animation: s2 1s infinite;
+}
+
+.main__spinner-loader::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 18px 18px;
+  animation-timing-function: linear;
+  --c: radial-gradient(farthest-side, #d5d2cb 92%, transparent);
+}
+
+@keyframes s2 {
+  100% {
+    transform: rotate(0.5turn);
+  }
 }
 
 .main__empty {
@@ -161,6 +206,22 @@
   font-weight: 400;
   color: #464645;
   padding: 70px;
+}
+
+.main__empty_type_warning {
+  color: #e75c16;
+  font-weight: 700;
+}
+
+.main__error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ee3465;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 20px;
+  text-align: center;
 }
 
 .main__jobs {
@@ -178,7 +239,7 @@
   gap: 10px;
 }
 
-.main__pagination-prev_next {
+.main__pagination-button {
   color: #d5d2cb;
   padding: 8px 15px;
   background: linear-gradient(
@@ -202,7 +263,6 @@
     margin: auto;
     background-color: #11120d;
     color: #d5d2cb;
-    font-family: "Raleway";
   }
 
   .main__jobs {

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import "./Login.css";
 import { isValidEmail } from "../../../utils/validator";
+import { Link } from "react-router-dom";
+import "./Login.css";
 
 function Login({ handleLogin }) {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ function Login({ handleLogin }) {
     password: "",
   });
   const [loginError, setLoginError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -17,9 +19,14 @@ function Login({ handleLogin }) {
   function handleSubmit(event) {
     event.preventDefault();
     setLoginError("");
-    handleLogin(formData).catch(() => {
-      setLoginError("Incorrect email or password. Please try again.");
-    });
+    setIsSubmitting(true);
+    handleLogin(formData)
+      .catch(() => {
+        setLoginError("Incorrect email or password. Please try again.");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   }
 
   const emailError =
@@ -34,6 +41,11 @@ function Login({ handleLogin }) {
 
   return (
     <section className="login">
+      {isSubmitting && (
+        <div className="login__spinner-overlay">
+          <div className="login__spinner-loader"></div>
+        </div>
+      )}
       <div className="login__card">
         <h1 className="login__title">LOGIN</h1>
         <p className="login__subtitle">
@@ -88,6 +100,7 @@ function Login({ handleLogin }) {
             className="login__submit"
             type="submit"
             disabled={
+              isSubmitting ||
               !formData.email ||
               !formData.password ||
               !isValidEmail(formData.email) ||
@@ -97,12 +110,11 @@ function Login({ handleLogin }) {
             Login
           </button>
         </form>
-
         <p className="login__footer">
           Don't have an account?{" "}
-          <a className="login__link" href="/register">
+          <Link className="login__link" to="/register">
             Register
-          </a>
+          </Link>
         </p>
       </div>
     </section>

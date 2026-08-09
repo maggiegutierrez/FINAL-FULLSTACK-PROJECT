@@ -1,5 +1,5 @@
 .register {
-  font-family: Raleway;
+  font-family: "Raleway", Arial, sans-serif;
   flex-shrink: 1;
   background-color: #11120d;
   color: #d5d2cb;
@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   margin: 0;
-  font-family: Federo;
+  font-family: "Federo", Arial, sans-serif;
   font-size: 70px;
   font-weight: 400;
 }
@@ -97,7 +97,7 @@
   transition: 0.3s ease-in-out;
   border-radius: 10px;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 900;
   color: #0b0b0b;
   align-items: center;
   justify-content: center;
@@ -115,6 +115,59 @@
   background-color: #d5d2cb;
   color: #a8aaa7;
   box-shadow: none;
+}
+
+.register__spinner-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(17, 18, 13, 0.803);
+  z-index: 1000;
+}
+
+.register__spinner-loader {
+  width: 140px;
+  height: 140px;
+  display: grid;
+}
+
+.register__spinner-loader::before,
+.register__spinner-loader::after {
+  content: "";
+  grid-area: 1/1;
+  --c: radial-gradient(farthest-side, #e75c16 92%, transparent);
+  background:
+    var(--c) 50% 0,
+    var(--c) 50% 100%,
+    var(--c) 100% 50%,
+    var(--c) 0 50%;
+  background-size: 28px 28px;
+  background-repeat: no-repeat;
+  animation: s2 1s infinite;
+}
+
+.register__spinner-loader::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 18px 18px;
+  animation-timing-function: linear;
+  --c: radial-gradient(farthest-side, #d5d2cb 92%, transparent);
+}
+
+@keyframes s2 {
+  100% {
+    transform: rotate(0.5turn);
+  }
+}
+
+.register__error {
+  color: #ee3465;
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+  padding: 0 0 10px;
 }
 
 .register__footer {

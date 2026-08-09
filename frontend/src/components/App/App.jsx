@@ -1,7 +1,7 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { SavedJobsProvider } from "../../context/SavedJobsContext";
+import { SavedJobsProvider } from "../../context/SavedJobsProvider";
 import "./App.css";
 
 import Login from "../Main/Login/Login";
@@ -34,10 +34,7 @@ function App() {
   };
 
   const handleRegister = ({ name, email, password }) => {
-    return auth
-      .register(name, email, password)
-      .then(() => navigate("/login"))
-      .catch(console.error);
+    return auth.register(name, email, password).then(() => navigate("/login"));
   };
 
   const handleLogout = () => {

@@ -49,7 +49,7 @@ function Header({ isLoggedIn, onLogout }) {
     return null;
   };
 
-  return <header className="header header__section">{renderOptions()}</header>;
+  return <header className="header">{renderOptions()}</header>;
 }
 
 export default Header;

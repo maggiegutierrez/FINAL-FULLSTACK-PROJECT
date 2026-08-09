@@ -7,6 +7,7 @@ function JobCard({
   title,
   company,
   location,
+  link,
   isSaved = false,
   onToggleSave = () => {},
 }) {
@@ -15,7 +16,18 @@ function JobCard({
   return (
     <article className="job-card">
       <div className="job-card__info">
-        <h3 className="job-card__title">{title}</h3>
+        {link ? (
+          <a
+            className="job-card__title-link"
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h3 className="job-card__title">{title}</h3>
+          </a>
+        ) : (
+          <h3 className="job-card__title">{title}</h3>
+        )}
         {meta && <p className="job-card__meta">{meta}</p>}
       </div>
 
@@ -39,6 +51,7 @@ JobCard.propTypes = {
   title: PropTypes.string.isRequired,
   company: PropTypes.string,
   location: PropTypes.string,
+  link: PropTypes.string,
   isSaved: PropTypes.bool,
   onToggleSave: PropTypes.func,
 };

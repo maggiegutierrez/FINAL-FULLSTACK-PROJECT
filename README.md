@@ -20,7 +20,7 @@ This website is using the [The Muse API](https://www.themuse.com/developers/api/
 - React Router DOM — routing (public/protected routes)
 - PropTypes — runtime prop type validation
 - Plain CSS (no framework like Tailwind/Bootstrap) — BEM-style class naming
-- Fonts: Raleway and Federo from Google Fonts
+- Fonts: "Raleway", Arial, sans-serif;, Arial, sans-serif; and "Federo", Arial, sans-serif; from Google Fonts
 
 ### BACKEND
 

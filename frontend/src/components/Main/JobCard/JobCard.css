@@ -13,11 +13,11 @@
   border: 1px solid rgba(154, 153, 153, 0.18);
   color: #e75c16;
   border-radius: 10px;
-  font-family: "Raleway";
+  font-family: "Raleway", Arial, sans-serif;
 }
 
 .job-card:hover {
-  box-shadow: 0 3px 7px 0 #e75c16cf;
+  box-shadow: 0 4px 7px 0 rgba(215, 214, 214, 0.37);
   margin-top: -4px;
   transition: 0.2s ease-in-out;
 }
@@ -33,6 +33,15 @@
   margin: 0;
   font-size: 13px;
   font-weight: 600;
+}
+
+.job-card__title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.job-card__title-link:hover .job-card__title {
+  text-decoration: underline;
 }
 
 .job-card__meta {

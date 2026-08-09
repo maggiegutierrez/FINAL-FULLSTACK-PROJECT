@@ -1,8 +1,11 @@
 import { useState } from "react";
-import "./Register.css";
 import { isValidEmail } from "../../../utils/validator";
+import { Link } from "react-router-dom";
+import "./Register.css";
 
 function Register({ handleRegister }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [registerError, setRegisterError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,7 +19,15 @@ function Register({ handleRegister }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    handleRegister(formData);
+    setRegisterError("");
+    setIsSubmitting(true);
+    handleRegister(formData)
+      .catch(() => {
+        setRegisterError("Could not create your account. Please try again.");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   }
 
   const emailError =
@@ -36,6 +47,11 @@ function Register({ handleRegister }) {
 
   return (
     <section className="register">
+      {isSubmitting && (
+        <div className="register__spinner-overlay">
+          <div className="register__spinner-loader"></div>
+        </div>
+      )}
       <div className="register__card">
         <h1 className="register__title">REGISTER</h1>
         <p className="register__subtitle">
@@ -108,11 +124,12 @@ function Register({ handleRegister }) {
               {passwordError}
             </span>
           </div>
-
+          {registerError && <p className="register__error">{registerError}</p>}
           <button
             className="register__submit"
             type="submit"
             disabled={
+              isSubmitting ||
               !formData.email ||
               !formData.password ||
               !formData.name ||
@@ -126,9 +143,9 @@ function Register({ handleRegister }) {
 
         <p className="register__footer">
           Already have an account?{" "}
-          <a className="register__link" href="/login">
+          <Link className="register__link" to="/login">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </section>

@@ -6,6 +6,7 @@ const savedJobSchema = new Schema({
   title: { type: String, required: true },
   company: { type: String },
   location: { type: String },
+  link: { type: String },
   savedAt: { type: Date, default: Date.now },
 });
 

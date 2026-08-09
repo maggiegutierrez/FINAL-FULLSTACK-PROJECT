@@ -1,16 +1,14 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { SavedJobsContext } from "./saveJobsContext";
 import { getCurrentUser } from "../utils/auth";
 import { saveJob, unsaveJob } from "../utils/jobs";
-
-const SavedJobsContext = createContext(null);
 
 export function SavedJobsProvider({ children, isLoggedIn }) {
   const [savedJobs, setSavedJobs] = useState([]);
 
   useEffect(() => {
     if (!isLoggedIn) {
-      setSavedJobs([]);
       return;
     }
     getCurrentUser()
@@ -32,6 +30,7 @@ export function SavedJobsProvider({ children, isLoggedIn }) {
         title: job.title,
         company: job.company,
         location: job.location,
+        link: job.link,
       })
         .then(setSavedJobs)
         .catch(console.error);
@@ -51,11 +50,3 @@ SavedJobsProvider.propTypes = {
   children: PropTypes.node.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
 };
-
-export function useSavedJobs() {
-  const context = useContext(SavedJobsContext);
-  if (!context) {
-    throw new Error("useSavedJobs must be used within a SavedJobsProvider");
-  }
-  return context;
-}
