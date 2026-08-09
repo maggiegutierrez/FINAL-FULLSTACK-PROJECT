@@ -1,3 +1,11 @@
+# COMENTARIOS PARA SU REVISIÓN
+
+    -Este proyecto es fullstack y esta completo, es decir, fue saltado (por confusión) entregar solo frontend, así que fue realizado completo con backend.
+    -El frontend trabaja con Vite ya que desde el inicio del bootcamp se trabaja con ello.
+    -La página está hecha en inglés ya que es el mercado demográfico al que se piensa que vaya dirigido.
+    -Se muestra un máximo de 9 resultados por búsqueda de trabajo para ser objetivos, pero se piensa que menos de esos resultados supondría un fastidio en el usuario al tener que recurrir al botón de next continuamente, ya que cuando se busca un empleo se suele querer varias opciones para poder comparar.
+    -La API third party se había creado en el backend ya que se investigó que es más seguro, pero por solictud en la primera revisión, se transfirió al frontend.
+
 # FINAL-FULLSTACK-PROJECT
 
     A helpful, modern and responsive website to search jobs. Just an easy filter to find the best vacancies at the best companies, you investigate further for what you want.

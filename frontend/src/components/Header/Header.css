@@ -49,13 +49,19 @@
   flex-direction: row;
 }
 
+.header__username {
+  color: #d5d2cb;
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: auto;
+}
+
 .header__logout {
   color: #e75c16;
   background-color: transparent;
   border: 0;
   font-size: 15px;
   font-weight: 400;
-  margin-left: auto;
   cursor: pointer;
   width: 150px;
 }
@@ -80,7 +86,16 @@
 
 @media (max-width: 586px) {
   .header__logo {
-    padding: 0 80px;
+    padding: 0 30px 0 80px;
+  }
+
+  .header__username {
+    max-width: 100px;
+  }
+
+  .header__logout {
+    width: 100px;
+    padding: 0;
   }
 
   .header__save-icon {

@@ -36,6 +36,8 @@ function Main() {
       )
     : jobs;
 
+  const visibleJobs = displayedJobs.slice(0, 9);
+
   function fetchJobs(pageToLoad) {
     setIsSubmitting(true);
     setSearchError("");
@@ -201,7 +203,7 @@ function Main() {
         {searchError && <p className="main__error">{searchError}</p>}
 
         <div className="main__jobs">
-          {displayedJobs.map((job) => (
+          {visibleJobs.map((job) => (
             <JobCard
               key={job.id}
               title={job.title}

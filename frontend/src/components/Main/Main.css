@@ -35,17 +35,19 @@
 
 .main__filter-wrapper {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: center;
   gap: 10px;
 }
 
 .main__filter {
+  width: 100%;
   color: #11120d;
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 5px;
-  padding: 10px 10px;
+  padding: 7px 10px;
   margin: 0;
   border: none;
   border-radius: 6px;
@@ -72,7 +74,8 @@
 
 .main__filter-item {
   position: relative;
-  max-width: 100%;
+  flex: 1;
+  max-width: 250px;
 }
 
 .main__filter-options {
@@ -130,9 +133,9 @@
 }
 
 .main__search {
-  width: 100%;
+  display: block;
   height: 30px;
-  margin: 20px 0 20px;
+  margin: 20px auto;
   padding: 0;
   border: none;
   border-radius: 10px;
@@ -144,6 +147,7 @@
   color: #a33215;
   cursor: pointer;
   letter-spacing: 10px;
+  width: 500px;
 }
 
 .main__search:hover {
@@ -225,6 +229,7 @@
 }
 
 .main__jobs {
+  padding-top: 15px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -294,20 +299,17 @@
   }
 
   .main__filter-wrapper {
-    display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
   }
 
   .main__filter {
-    padding: 7px;
     width: 100%;
-    display: flex;
-    justify-content: center;
   }
 
   .main__filter-item {
     width: 100%;
+    max-width: 100%;
   }
 
   .main__filter-options {
@@ -320,6 +322,10 @@
 
     border: rgba(73, 73, 73, 0.18);
     border-radius: 8px;
+  }
+
+  .main__search {
+    width: 100%;
   }
 
   .main__jobs {

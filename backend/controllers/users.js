@@ -28,7 +28,7 @@ const login = async (req, res, next) => {
         secure: isProduction,
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
-      .send({ message: "Login successful" });
+      .send({ message: "Login successful", name: user.name });
   } catch (err) {
     next(err);
   }

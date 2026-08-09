@@ -2,7 +2,7 @@ import logo from "../../../public/find-icon.png";
 import { useLocation, Link } from "react-router-dom";
 import saveIcon from "../../assets/images/save-icon_marked.png";
 
-function Header({ isLoggedIn, onLogout }) {
+function Header({ isLoggedIn, userName, onLogout }) {
   const location = useLocation();
 
   const renderOptions = () => {
@@ -10,6 +10,7 @@ function Header({ isLoggedIn, onLogout }) {
       return (
         <>
           <img src={logo} alt="Find me a job" className="header__logo" />
+          <span className="header__username">Hi, {userName} </span>
           <button onClick={onLogout} className="header__logout">
             Logout
           </button>

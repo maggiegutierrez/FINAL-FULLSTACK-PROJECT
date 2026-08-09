@@ -16,19 +16,24 @@ import * as auth from "../../utils/auth";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isCheckingSession, setIsCheckingSession] = useState(true);
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     auth
       .getCurrentUser()
-      .then(() => setIsLoggedIn(true))
+      .then((user) => {
+        setIsLoggedIn(true);
+        setUserName(user.name);
+      })
       .catch(() => setIsLoggedIn(false))
       .finally(() => setIsCheckingSession(false));
   }, []);
 
   const handleLogin = ({ email, password }) => {
-    return auth.login(email, password).then(() => {
+    return auth.login(email, password).then((data) => {
       setIsLoggedIn(true);
+      setUserName(data.name);
       navigate("/");
     });
   };
@@ -42,6 +47,7 @@ function App() {
       .logout()
       .then(() => {
         setIsLoggedIn(false);
+        setUserName("");
         navigate("/login");
       })
       .catch(console.error);
@@ -50,7 +56,11 @@ function App() {
   return (
     <SavedJobsProvider isLoggedIn={isLoggedIn}>
       <div className="app">
-        <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+        <Header
+          isLoggedIn={isLoggedIn}
+          userName={userName}
+          onLogout={handleLogout}
+        />
         <Routes>
           <Route
             element={
