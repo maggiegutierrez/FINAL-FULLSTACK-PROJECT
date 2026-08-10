@@ -1,5 +1,3 @@
-# COMENTARIOS PARA SU REVISIÓN
-
 # FINAL-FULLSTACK-PROJECT
 
     A helpful, modern and responsive website to search jobs. Just an easy filter to find the best vacancies at the best companies, you investigate further for what you want.
