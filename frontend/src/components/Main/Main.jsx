@@ -81,6 +81,13 @@ function Main() {
           <div className="main__spinner-loader"></div>
         </div>
       )}
+      {openFilter && (
+        <div
+          className="main__filter-overlay"
+          onClick={() => setOpenFilter(null)}
+        ></div>
+      )}
+
       <div className="main__card">
         <h1 className="main__title">FIND A JOB</h1>
         <p className="main__subtitle">
