@@ -1,4 +1,11 @@
+# Directorio de dependencias
 node_modules
-.env
+
+# Logs
 *.log
+
+# Archivos de sistema
+.env
 .DS_Store
+.idea
+.vscode
