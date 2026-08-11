@@ -1,7 +1,11 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
-const { JWT_SECRET } = require("../utils/config");
+const {
+  JWT_SECRET,
+  SESSION_DURATION_MS,
+  SESSION_DURATION_SECONDS,
+} = require("../utils/config");
 const { NotFoundError, UnauthorizedError } = require("../errors/indexErrors");
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -20,13 +24,15 @@ const login = async (req, res, next) => {
       throw new UnauthorizedError("Password or email incorrect");
     }
 
-    const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
+      expiresIn: SESSION_DURATION_SECONDS,
+    });
     res
       .cookie("jwt", token, {
         httpOnly: true,
         sameSite: isProduction ? "none" : "lax",
         secure: isProduction,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: SESSION_DURATION_MS,
       })
       .send({ message: "Login successful", name: user.name });
   } catch (err) {
