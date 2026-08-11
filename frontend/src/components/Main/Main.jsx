@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { searchJobs } from "../../utils/jobs";
+import { searchJobs } from "../../utils/apiJobs";
 import { useSavedJobs } from "../../context/useSavedJobs";
 import JobCard from "./JobCard/JobCard";
 import "./Main.css";

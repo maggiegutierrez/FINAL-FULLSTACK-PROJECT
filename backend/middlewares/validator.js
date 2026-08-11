@@ -1,4 +1,4 @@
-const { celebrate, Joi, Segments } = require('celebrate');
+const { celebrate, Joi, Segments } = require("celebrate");
 
 const validateUserId = celebrate({
   [Segments.PARAMS]: Joi.object().keys({
@@ -21,8 +21,25 @@ const validateLogin = celebrate({
   }),
 });
 
+const validateJobCardId = celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    jobCardId: Joi.number().integer().positive().required(),
+  }),
+});
+
+const validateSaveJobCard = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    title: Joi.string().required(),
+    company: Joi.string().allow(""),
+    location: Joi.string().allow(""),
+    link: Joi.string().uri().allow(""),
+  }),
+});
+
 module.exports = {
   validateUserId,
   validateCreateUser,
   validateLogin,
+  validateJobCardId,
+  validateSaveJobCard,
 };

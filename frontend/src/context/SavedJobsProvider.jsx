@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { SavedJobsContext } from "./saveJobsContext";
-import { getCurrentUser } from "../utils/auth";
-import { saveJob, unsaveJob } from "../utils/jobs";
+import { saveJob, unsaveJob, getSavedJobs } from "../utils/apiJobs";
 
 export function SavedJobsProvider({ children, isLoggedIn }) {
   const [savedJobs, setSavedJobs] = useState([]);
@@ -11,9 +10,7 @@ export function SavedJobsProvider({ children, isLoggedIn }) {
     if (!isLoggedIn) {
       return;
     }
-    getCurrentUser()
-      .then((user) => setSavedJobs(user.savedJobs))
-      .catch(console.error);
+    getSavedJobs().then(setSavedJobs).catch(console.error);
   }, [isLoggedIn]);
 
   function isJobSaved(jobId) {
