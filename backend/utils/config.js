@@ -1,5 +1,4 @@
-const { JWT_SECRET = "dev-secret-key", SESSION_DURATION_DAYS = 7 } =
-  process.env;
+const { JWT_SECRET = 'dev-secret-key', SESSION_DURATION_DAYS = 7 } = process.env;
 
 const SESSION_DURATION_MS = Number(SESSION_DURATION_DAYS) * 24 * 60 * 60 * 1000;
 const SESSION_DURATION_SECONDS = SESSION_DURATION_MS / 1000;

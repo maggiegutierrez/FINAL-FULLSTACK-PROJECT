@@ -1,18 +1,18 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
 
-const auth = require("./middlewares/auth");
-const errorHandler = require("./middlewares/errors");
-const cors = require("cors");
-const { requestLogger, errorLogger } = require("./middlewares/logger");
-const cookieParser = require("cookie-parser");
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const auth = require('./middlewares/auth');
+const errorHandler = require('./middlewares/errors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(";")
-  : ["http://localhost:5173"];
+  ? process.env.ALLOWED_ORIGINS.split(';')
+  : ['http://localhost:5173'];
 
 app.use(
   cors({
@@ -20,12 +20,12 @@ app.use(
     credentials: true,
   }),
 );
-app.options("*splat", cors());
+app.options('*splat', cors());
 
 const { PORT = 3000 } = process.env;
-const userRouter = require("./routes/users");
-const jobCardsRouter = require("./routes/jobCards");
-const authUserRouter = require("./routes/auth");
+const userRouter = require('./routes/users');
+const jobCardsRouter = require('./routes/jobCards');
+const authUserRouter = require('./routes/auth');
 
 app.use(express.json());
 app.use(requestLogger);
@@ -38,22 +38,22 @@ app.use(auth);
 
 const initApp = async () => {
   app.listen(PORT, () => {
-    console.log("Still working!");
+    console.log('Still working!');
   });
 
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("Connected to MongoDB in Atlas");
+    console.log('Connected to MongoDB in Atlas');
   } catch (error) {
     console.log(`Error connecting to MongoDB: ${error.message}`);
   }
 };
 
-app.use("/users", userRouter);
-app.use("/job-cards", jobCardsRouter);
+app.use('/users', userRouter);
+app.use('/job-cards', jobCardsRouter);
 
-app.use("*splat", (req, res) => {
-  res.status(404).json({ message: "Resource required not found" });
+app.use('*splat', (req, res) => {
+  res.status(404).json({ message: 'Resource required not found' });
 });
 
 app.use(errorLogger);
