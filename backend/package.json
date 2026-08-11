@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "lint": "npx eslint",
+    "lint": "eslint .",
     "deploy": "gcloud run deploy job-board-backend --source . --region us-central1 --allow-unauthenticated --set-env-vars NODE_ENV=production,ALLOWED_ORIGINS=\"http://localhost:5173;https://project-ef82d4ab-d03e-4bdb-b4a.web.app\",SESSION_DURATION_DAYS=7 --set-secrets MONGO_URI=MONGO_URI:latest,JWT_SECRET=JWT_SECRET:latest,MUSE_API_KEY=MUSE_API_KEY:latest"
   },
   "dependencies": {
@@ -23,9 +23,11 @@
     "winston": "^3.19.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14",
-    "eslint": "^8.56.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.32.0"
+    "eslint-plugin-import": "^2.32.0",
+    "globals": "^17.9.0",
+    "nodemon": "^3.1.14"
   }
 }
