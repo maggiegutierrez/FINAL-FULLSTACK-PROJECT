@@ -1,4 +1,4 @@
-const { celebrate, Joi, Segments } = require("celebrate");
+const { celebrate, Joi, Segments } = require('celebrate');
 
 const validateUserId = celebrate({
   [Segments.PARAMS]: Joi.object().keys({
