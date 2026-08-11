@@ -2,6 +2,8 @@
 
 - Sobre que el servidor no arranque en desarrollo sin `.env`: ya saqué app.listen() del try/catch en index.js, es verdad que así el servidor arranca sin importar el estado de la conexión a MongoDB. Y consideré darle un valor de respaldo a MONGO_URI (como ya tiene el JWT_SECRET), pero investigué un poco que no aplica de la misma forma porque mi base de datos vive en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), y que un valor por defecto solo funcionaría apuntando a una instancia local de Mongo, que no es mi caso.
 
+#### Gracias por la completa y sí personalizada revisión.
+
 # FINAL-FULLSTACK-PROJECT
 
     A helpful, modern and responsive website to search jobs. Just an easy filter to find the best vacancies at the best companies, you investigate further for what you want.

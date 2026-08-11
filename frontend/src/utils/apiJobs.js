@@ -3,6 +3,15 @@ import { BASE_URL } from "./constants";
 const MUSE_BASE_URL = "https://www.themuse.com/api/public/jobs";
 const MUSE_API_KEY = import.meta.env.VITE_MUSE_API_KEY;
 
+export const getSavedJobs = () => {
+  return fetch(`${BASE_URL}/job-cards`, {
+    method: "GET",
+    credentials: "include",
+  }).then((res) =>
+    res.ok ? res.json() : Promise.reject(`Get saved jobs error ${res.status}`),
+  );
+};
+
 export const saveJob = (jobId, { title, company, location, link }) => {
   return fetch(`${BASE_URL}/job-cards/${jobId}`, {
     method: "POST",
