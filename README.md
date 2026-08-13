@@ -100,7 +100,7 @@ The infrastructure was build an deployed with:
 - Firebase Hosting — frontend hosting (static site)
 
 With a great version control and workflow combining Git + GitHub with a develop → Pull Request → main flow; and Postman for manual testing of backend endpoints during development.
-Claude Code was used as a virtual tutor only for guidance with the flow, recommendations and explanations. No code was created or "touch" by it.
+Claude Code was used as a virtual tutor only for guidance with the flow, recommendations and explanations, but no code was created or "touch" by it.
 
 ## Author
 
